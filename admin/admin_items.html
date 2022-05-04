@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> 
+  <script src="./loaditems.js"></script>
+  <!-- <script src="/accountInfo.js"></script> -->
+  <title>Document</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm bg-light">
+    <div class="container-fluid">
+      <div class="row w-100">
+        <div class="col-sm-4">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="./admin_items.html">Quản lí sản phẩm</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <div class="d-flex">
+            <form action="./search.html" class="d-flex">
+              <input class="form-control" type="text" placeholder="Search" name="target">
+              <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+            <button type="button" class="btn btn-primary ms-1" data-bs-toggle="modal" data-bs-target="#appendDialog">
+              Thêm sản phẩm
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-4 px-0 pt-1">
+          <div class="d-flex justify-content-end">
+            <div id="login" class="align-self-center">
+              <a class="nav-link" href="/login.html">Đăng nhập</a>
+            </div>
+            <div id="regis">
+              <a class="nav-link" href="/registration.html">Đăng kí</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- The Modal -->
+  <div class="modal fade" id="appendDialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Điền thông tin sản phẩm</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="card px-0">
+              <img id="display" src="/images/notfound.jpg" class="card-img-top" alt="Hãy chọn ảnh hiển thị">
+            <div class="card-body input-group">
+              <span class="input-group-text">ID: </span>
+              <input id="ID" class="form-control" readonly type="text" readonly/>
+            </div>
+            <div class="card-body input-group">
+              <span class="input-group-text">Tên: </span>
+              <input id="name" class="form-control" type="text"/>
+            </div>
+            <div class="card-body input-group">
+              <span class="input-group-text">Giá: </span>
+              <input id="price" class="form-control" type="number"/>
+            </div>
+            <div class="card-body input-group">
+              <span class="input-group-text">Hình: </span>
+              <input id="img" class="form-control" type="file" onchange="loadImg(event, 'display', false)"/>
+            </div>
+            <div class="card-body input-group">
+              <span class="input-group-text">Mã giảm giá: </span>
+              <input id="discountCode" class="form-control" type="text"/>
+            </div>
+            <div class="card-body input-group">
+              <span class="input-group-text">Mô tả: </span>
+              <input id="desc" class="form-control" type="text"/>
+            </div>
+            <div class="card-footer text-center">
+              <button type="button" class="btn btn-primary"
+              onclick="appendItem()" data-bs-dismiss="modal">Thêm sản phẩm</button>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Modal footer
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div> -->
+  
+      </div>
+    </div>
+  </div>
+  <main id="container" class="container-fluid ps-5 px-auto">
+  </main>
+  <script>
+    loadItems(0, 12);
+  </script>
+</body>
+</html>

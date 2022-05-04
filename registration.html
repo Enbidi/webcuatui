@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> 
+    <script src="./database.js"></script>
+    <script>
+      function regisCheck() {
+        const {
+          email,
+          pswd,
+          repswd,
+          firstname,
+          lastname
+        } = document.forms[1];
+        if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email.value)) {
+          email.setCustomValidity("Invalid");
+          return false;
+        }
+        else {
+          email.setCustomValidity("");
+        }
+        if (!/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/.test(pswd.value)) {
+          pswd.setCustomValidity("Invalid");
+          return false;
+        }
+        else {
+          pswd.setCustomValidity("");
+        }
+        if (pswd.value != repswd.value) {
+          repswd.setCustomValidity("Invalid");
+          return false;
+        }
+        else {
+          repswd.setCustomValidity("");
+        }
+        const database = JSON.parse(window.localStorage.getItem("accounts"));
+        database.push(
+          {
+            name: `${firstname.value} ${lastname.value}`,
+            email: email.value,
+            pass: pswd.value
+          }
+        );
+        console.log(database);
+        window.localStorage.setItem("accounts", JSON.stringify(database));
+        return true;
+      }
+
+      document.addEventListener("DOMContentLoaded", e => {
+        (function() {
+          'use strict'
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.querySelectorAll('.needs-validation')
+
+          // Loop over them and prevent submission
+          Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+              form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                  event.preventDefault()
+                  event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+              }, false)
+              form.addEventListener('change', regisCheck);
+            })
+        })()
+      });
+    </script>
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <div id="header-content" class="carousel slide" data-bs-ride="carousel">
+            <!-- Indicators/dots -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#header-content" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#header-content" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#header-content" data-bs-slide-to="2"></button>
+            </div>
+            <!-- The slideshow/carousel -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./images/trang_chu/ban-le1.jpg" alt="Los Angeles" class="d-block w-100">
+                </div>
+                <div class="carousel-item">
+                    <img src="./images/trang_chu/test.jpg" alt="Chicago" class="d-block w-100">
+                </div>
+                <div class="carousel-item">
+                    <img src="./images/3-16262584169451043856839.webp" alt="">
+                </div>
+            </div>
+            <!-- Left and right controls/icons -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#header-content" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#header-content" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+        </div>
+    </header>
+    <nav class="navbar navbar-expand-sm bg-light">
+      <div class="container-fluid">
+        <div class="row w-100">
+          <div class="col-sm-4">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" href="./index.html">Trang chủ</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./sanpham/page1.html">Sản phẩm</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./cart.html">Giỏ hàng</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-4">
+            <form action="./sanpham/search.html" class="d-flex">
+              <input class="form-control" type="text" name="target" placeholder="Search">
+              <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+          </div>
+          <div class="col-sm-4 px-0 pt-1">
+            <div class="d-flex justify-content-end">
+              <div id="login" class="align-self-center">
+                <a class="nav-link" href="./login.html">Đăng nhập</a>
+              </div>
+              <div id="regis">
+                <a class="nav-link" href="./registration.html">Đăng kí</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main class="container-fluid p-5 pe-5 border px-auto">
+        <form action="./index.html" class="border px-5 needs-validation" novalidate>
+            <fieldset>
+                <legend class="text-center h1">Đăng kí tài khoản</legend>
+                <div class="mb-3 mt-3">
+                    <label for="firstname" class="form-label">Firstname:</label>
+                    <input type="text" class="form-control" id="firstname" placeholder="Enter your firstname" name="firstname" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                    <div class="invalid-feedback">
+                      Hãy nhập firstname
+                    </div>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="lastname" class="form-label">Lastname:</label>
+                    <input type="text" class="form-control" id="lastname" placeholder="Enter your lastname" name="lastname" required>
+                    <div class="valid-feedback">
+                      OK!
+                    </div>
+                    <div class="invalid-feedback">
+                      Hãy nhập lastname
+                    </div>
+                </div>
+                <div class="form-label">
+                    Giới tính:
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" id="male" name="gender" value="Male" checked>
+                    <label class="form-check-label" for="male">Nam</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" id="female" name="gender" value="Female">
+                    <label class="form-check-label" for="female">Nữ</label>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+                    <div class="valid-feedback">
+                      OK!
+                    </div>
+                    <div class="invalid-feedback">
+                      Email không hợp lệ
+                    </div>      
+                </div>
+                <div class="mb-3">
+                    <label for="pwd" class="form-label">Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+                    <div class="valid-feedback">
+                      OK!
+                    </div>
+                    <div class="invalid-feedback">
+                      Password chưa đủ mạnh
+                    </div>
+                  </div>
+                <div class="mb-3">
+                    <label for="repwd" class="form-label">Nhập lại Password:</label>
+                    <input type="password" class="form-control" id="repwd" placeholder="Enter password" name="repswd" required>
+                    <div class="valid-feedback">
+                      OK!
+                    </div>
+                    <div class="invalid-feedback">
+                      Password không khớp
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Đăng kí</button>
+                <button type="reset" class="btn btn-secondary">Hủy</button>
+            </fieldset>
+        </form>
+    </main>
+    <footer>
+        <img src="./images/header.jpg" alt="">
+    </footer>
+</body>
+
+</html>

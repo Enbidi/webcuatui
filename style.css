@@ -1,0 +1,33 @@
+body {
+  margin: 0px 0px;
+}
+
+header img, footer img {
+  width: 100%;
+  height: 400px;
+}
+
+#headerContainer {
+  position: relative;
+}
+
+#searchBox {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+}
+
+main {
+  position: relative;
+}
+
+.sticky-right {
+  position: sticky;
+  right: 0;
+  top: 50;
+}
