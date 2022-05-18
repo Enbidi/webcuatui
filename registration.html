@@ -49,6 +49,7 @@
         );
         console.log(database);
         window.localStorage.setItem("accounts", JSON.stringify(database));
+        window.localStorage.setItem("logged_in", lastname.value);
         return true;
       }
 
